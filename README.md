@@ -12,25 +12,37 @@ In a nutshell, it means that developers are not just responsible for writing cod
 
 ### Documentation is never good enough
 
-Let's be clear: on any project documentation is good enough. Why? because it is impossible to measure and therefore it always meets the Definition of done requirements, even if the documentation is a couple sentences it is still documentation. However, this doesn't mean they can't harness the power of **Docker to document** their applications properly and promote good practices in their architecture. 
+Let's be clear: on any project documentation is good enough. Why? because it is impossible to measure and therefore it always meets the Definition of done requirements, even if the documentation is a couple sentences it is still documentation. However, this doesn't mean they can't harness the power of **Docker to document** their applications properly and promote good practices in their architecture.
 
-AQUI ESTARIA BIEN AÑADIR UNA COMPARATIVA DEL DOD DE UN PROYECTO CON Y SIN DOCKERFILE
+From a devops perspective, the dockerfile, the image, and the `docker run` commands are the operational documentation for the application. **Any devops joining the project would be capable of building an environment based only on the requirements detailed on those files**, without requiring any additional project context. **Even if the project is not intended to run on production using containers, the dockerfile is still a great reference** to detail the kind of environment the application requires.
 
-SIN DOCKERFILE PONER UN SCREENSHOT DONDE SE VE UN HELLO_WORLD.PY Y UN README DE UNA LINEA DICIENDO QUE HAY QUE INSTALAR PYTHON Y EJECUTAR EL SCRIPT QUE IMPRIME HOLA MUNDO, COSA QUE CUMPLE CON EL DOD
+Not only that, but by running the `docker run` command with the image provided, the devops team can validate the application starts as expected in a matter of minutes.
+
+Here there are a couple examples of DoD enforcing (and not) the use of Docker to document the applications:
+
+#### Project not enforcing the use of Dockerfile
+
+##### Definition of done
+
 - Code is written and tested with a coverage of >80%
 - Functional documentation is written in markdown
 - Operational documentation is written in markdown
 
-CON DOCKERFILE PONER UN SCREENSHOT DONDE SE VE UN HELLO_WORLD.PY, Y DOCKERFILE Y UN README DE UNA LINEA DICIENDO QUE EL SCRIPT IMPRIME HOLA MUNDO. VENTAJAS: SEPARAMOS FUNCTIONAL Y OPERATIONAL DOC, DOCKERFILE DA INFO EXACTA DE COMO EJECUTAR EL SCRIPT
-Consider for a second this sample DoD for a project:
+![without](img/without.png)
+
+As you can see in the screenshot, this project is meeting the DoD requirements. A single line in the readme file is enough to meet the DoD requirements, **it tells the language used and what the app does**, and therefore the project would be ready to be delivered. However, the operational documentation is not enough to deploy the application to production, and therefore the devops team will have to spend time and effort to understand the application and build the environment.
+
+#### Project enforcing the use of Dockerfile
+
+##### Definition of done
 
 - Code is written and tested with a coverage of >80%
 - Functional documentation is written in markdown
 - Dockerfile, docker image and `docker run` command are provided
 
-From a devops perspective, the dockerfile, the image, and the `docker run` commands are the operational documentation for the application. **Any devops joining the project would be capable of building an environment based only on the requirements detailed on those files**, without requiring any additional project context. **Even if the project is not intended to run on production using containers, the dockerfile is still a great reference** to detail the kind of environment the application requires.
+![with](img/with.png)
 
-NOT ONLY THAT, BUT BY RUNNING THE `DOCKER RUN` COMMAND WITH THE IMAGE PROVIDED, THE DEVOPS CAN VALIDATE THE APPLICATION STARTS AS EXPECTED IN A MATTER OF MINUTES.
+As you can see in the screenshot, this project is still far from being perfect, but the Dockerfile includes specific details about the environment the application requires, and therefore the devops team can build the environment without the need of additional information. **The dockerfile is the operational documentation** for the application.
 
 ### Leveraging Docker for Documentation
 
